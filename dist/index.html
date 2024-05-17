@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student List</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container my-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Student List</h1>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#addStudentModal"
+        >
+          Add Student
+        </button>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="d-flex">
+          <input
+            type="text"
+            class="form-control mr-2"
+            placeholder="Search"
+            id="searchInput"
+          />
+          <select class="form-control mr-2" id="jobFilter">
+            <option value="">Job Filter</option>
+            <option value="ReactJs Developer">ReactJs Developer</option>
+            <option value="NodeJs Developer">NodeJs Developer</option>
+            <option value="Go Developer">Go Developer</option>
+          </select>
+          <select class="form-control mr-2" id="positionFilter">
+            <option value="">Position Filter</option>
+            <option value="junior">Junior</option>
+            <option value="middle">Middle</option>
+            <option value="senior">Senior</option>
+          </select>
+        </div>
+      </div>
+     
+      <div id="studentList"></div>
+
+      <!-- Add Student Modal -->
+      <div
+        class="modal fade"
+        id="addStudentModal"
+        tabindex="-1"
+        aria-labelledby="addStudentModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addStudentModalLabel">Add Student</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form id="addStudentForm">
+                <div class="mb-3">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="firstName"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lastName"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="address" class="form-label">Address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="birthdate" class="form-label">Birthdate</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="birthdate"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="job" class="form-label">Job</label>
+                  <select class="form-control" id="job" required>
+                    <option value="">Select Job</option>
+                    <option value="ReactJs Developer">ReactJs Developer</option>
+                    <option value="NodeJs Developer">NodeJs Developer</option>
+                    <option value="Go Developer">Go Developer</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="position" class="form-label">Position</label>
+                  <select class="form-control" id="position" required>
+                    <option value="">Select Position</option>
+                    <option value="junior">Junior</option>
+                    <option value="middle">Middle</option>
+                    <option value="senior">Senior</option>
+                  </select>
+                </div>
+                <div class="mb-3 form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="married"
+                  />
+                  <label class="form-check-label" for="married">Married</label>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary" id="saveStudent">
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Student Modal -->
+      <div
+        class="modal fade"
+        id="editStudentModal"
+        tabindex="-1"
+        aria-labelledby="editStudentModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editStudentModalLabel">
+                Edit Student
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form id="editStudentForm">
+                <div class="mb-3">
+                  <label for="editFirstName" class="form-label"
+                    >First Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editFirstName"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="editLastName" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editLastName"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="editAddress" class="form-label">Address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="editAddress"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="editBirthdate" class="form-label"
+                    >Birthdate</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="editBirthdate"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="editJob" class="form-label">Job</label>
+                  <select class="form-control" id="editJob" required>
+                    <option value="">Select Job</option>
+                    <option value="ReactJs Developer">ReactJs Developer</option>
+                    <option value="NodeJs Developer">NodeJs Developer</option>
+                    <option value="Go Developer">Go Developer</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="editPosition" class="form-label">Position</label>
+                  <select class="form-control" id="editPosition" required>
+                    <option value="">Select Position</option>
+                    <option value="junior">Junior</option>
+                    <option value="middle">Middle</option>
+                    <option value="senior">Senior</option>
+                  </select>
+                </div>
+                <div class="mb-3 form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="editMarried"
+                  />
+                  <label class="form-check-label" for="editMarried"
+                    >Married</label
+                  >
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary" id="updateStudent">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
